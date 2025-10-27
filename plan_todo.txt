@@ -1,8 +1,8 @@
-Lämna in https://github.com/Medieinstitutet/fed25s-the-todos-pogon0
+FIXAT Lämna in https://github.com/Medieinstitutet/fed25s-the-todos-pogon0
 
-testa att öppna projektet
+FIXAT testa att öppna projektet
 
-committa och pusha den här filen så vi vet att det funkar
+FIXAT committa och pusha den här filen så vi vet att det funkar
 
 installera tailwind
 
