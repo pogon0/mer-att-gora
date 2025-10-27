@@ -25,7 +25,7 @@ function renderTodoList() {
       //   li.style.display = "none"; // döljer raden om jag klickar på den
 
       item.done = !item.done; // toggla done
-      todoList.items = todoList.items.filter((i) => i.id !== item.id);
+      //   todoList.items = todoList.items.filter((i) => i.id !== item.id);
 
       //   li.className = item.done ? "text-red-500" : "text-black";
       //   item.done = !item.done; // toggla done (det här togglar färgen)
@@ -37,13 +37,32 @@ function renderTodoList() {
 }
 renderTodoList();
 
-//Skapa en hårdkodad lista med punkter att göra.
-//Presentera denna på skärmen, helst med lite kontroll.
-//Detta betyder i en html-struktur t.ex. i en ul/li-lista
-//Implementera klickhändelse för att hantera borttagandet av en todo.
-//Todo tas bort från skärmen och markeras som klar i javascript-listan.
-//Implementera tailwind eller liknande för stylingen
-//VG
-//Kunna visa även klara händelser och klicka tillbaka den så att de blir oklara igen.
-//Skapa ett formulär som tillåter att en användare skapar nya todos efterhand.
-//Kunna sortera ordningen på dina todos
+//Det här är inputfältet
+const input = document.createElement("input");
+input.type = "text";
+input.className =
+  "bg-white p-2 mt-2 block w-full border border-gray-300 rounded";
+
+const listElement = document.getElementById("todo-list");
+listElement.parentNode.appendChild(input);
+
+function addTodoFromInput() {
+  const text = input.value.trim();
+  if (text === "") return;
+  //id-t ska blir +1 från det sista
+  const newId = todoList.items.length
+    ? todoList.items[todoList.items.length - 1].id + 1
+    : 1;
+
+  todoList.items.push({ id: newId, text, done: false });
+
+  input.value = "";
+  renderTodoList();
+}
+
+// Lägg till grej när man trycker Enter
+input.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    addTodoFromInput();
+  }
+});

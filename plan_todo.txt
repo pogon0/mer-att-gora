@@ -2,13 +2,25 @@ FIXAT Lämna in https://github.com/Medieinstitutet/fed25s-the-todos-pogon0
 
 FIXAT testa att öppna projektet
 
-FIXAT committa och pusha den här filen så vi vet att det funkar
+FIXAT committa och pusha den här filen så jag vet att det funkar
 
-installera tailwind
+Installera tailwind (funkar inte som det ska, fixade med länk istället)
 
-gör skiss och pila in allt som ska göras
+FIXAT Minimal viable product=G 
 
-Minimal viable product=G
+VG
+(VG) FIXAT Kunna visa även klara händelser och klicka tillbaka den så att de blir oklara igen.
+
+(VG) FIXAT Skapa ett formulär som tillåter att en användare skapar nya todos efterhand.
+
+//Spara och hämta listan i LocalStorage
+
+//gör allt med ikoner istället
+//Ta bort sak från listan
 
 
+//(VG) Kunna sortera ordningen på dina todos
+
+
+.
 Icon
