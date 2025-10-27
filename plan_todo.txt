@@ -9,3 +9,6 @@ installera tailwind
 gör skiss och pila in allt som ska göras
 
 Minimal viable product=G
+
+
+Icon
