@@ -16,8 +16,12 @@ VG
 //Spara och hämta listan i LocalStorage
 
 //gör allt med ikoner istället
+
+FIXAT Rita ikoner för true, false, plus, minus, upp, ner 24px svg
+
 //Ta bort sak från listan
 
+//sortera: gjord/ogjord --alfabetiskt -- 
 
 //(VG) Kunna sortera ordningen på dina todos
 

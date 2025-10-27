@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Lager_1" data-name="Lager 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g>
+    <rect class="cls-1" x="2" y="2" width="20" height="20"/>
+    <path d="M20,4v16H4V4h16M24,0H0v24h24V0h0Z"/>
+  </g>
+  <g>
+    <rect x="9.97" y="8.59" width="4" height="4" transform="translate(-3.98 11.56) rotate(-45)"/>
+    <rect x="12.8" y="11.41" width="4" height="4" transform="translate(-5.15 14.39) rotate(-45)"/>
+    <rect x="7.14" y="11.41" width="4" height="4" transform="translate(-6.81 10.39) rotate(-45)"/>
+  </g>
+</svg>
