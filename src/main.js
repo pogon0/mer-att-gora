@@ -45,8 +45,10 @@ let sortUp = true;
 
 // Sorteringsknappen
 sortButton.addEventListener("click", () => {
-  sortUp = !sortUp; //Togglar sorteringen/ikonen
+  sortUp = !sortUp;
   sortIcon.src = sortUp ? "/icons/up.svg" : "/icons/down.svg";
+  todoList.items.sort((a, b) => (sortUp ? a.done - b.done : b.done - a.done));
+  localStorage.setItem("todos", JSON.stringify(todoList.items));
   renderTodoList();
 });
 
@@ -79,23 +81,20 @@ function renderTodoList() {
   const listElement = document.getElementById("todo-list");
   listElement.innerHTML = ""; // Töm listan först
 
-  // Sortera listan ÄR DET DET HÄR SOM KNASAR?
-  const sortedItems = [...todoList.items].sort((a, b) =>
-    sortUp ? a.done - b.done : b.done - a.done
-  );
-
-  // Rita ut sorterade grejor
-  sortedItems.forEach((item) => {
+  todoList.items.forEach((item) => {
     const li = document.createElement("li");
     li.textContent = item.text;
+    li.dataset.id = item.id;
     li.className = item.done
       ? "font-mono text-red-500 mb-2"
       : "font-mono text-black mb-2";
 
     li.addEventListener("click", () => {
-      item.done = !item.done; // toggla done
+      item.done = !item.done;
       localStorage.setItem("todos", JSON.stringify(todoList.items));
-      renderTodoList();
+      li.className = item.done
+        ? "font-mono text-red-500 mb-2"
+        : "font-mono text-black mb-2";
     });
 
     listElement.appendChild(li);
