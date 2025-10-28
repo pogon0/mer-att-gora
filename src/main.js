@@ -1,4 +1,31 @@
 import "./main.scss";
+//styling för sidan
+document.body.className =
+  "bg-gray-100 flex items-center justify-center min-h-screen";
+
+//styling för "appen"
+const app = document.getElementById("app");
+app.className = "bg-yellow-300 p-6 rounded shadow h-[650px] max-w-md w-full";
+
+//här kommer rubben
+const title = document.createElement("h1");
+title.id = "merAttGora";
+title.textContent = "mer att göra";
+title.className = "text-4xl font-bold font-mono mb-2";
+app.appendChild(title);
+
+//här gör vi ul:en till listan
+const listElement = document.createElement("ul");
+listElement.id = "todo-list";
+listElement.className = "font-mono mt-4";
+app.appendChild(listElement);
+
+//Det här är inputfältet
+const input = document.createElement("input");
+input.type = "text";
+input.className =
+  "bg-white p-2 mt-4 block w-full rounded focus:outline-none focus:ring-0";
+listElement.parentNode.appendChild(input);
 
 //det här är min grundlista
 const todoList = {
@@ -13,13 +40,15 @@ const todoList = {
 
 //nu ritar jag ut den på skärmen
 function renderTodoList() {
-  const listElement = document.getElementById("todo-list");
+  const listElement = document.getElementById("todo-list"); //knas
   listElement.innerHTML = ""; // Töm listan så det inte blir dubbletter sen
 
   todoList.items.forEach((item) => {
     const li = document.createElement("li");
     li.textContent = item.text;
-    li.className = item.done ? "text-red-500 mb-2" : "text-black mb-2";
+    li.className = item.done
+      ? "font-mono text-red-500 mb-2"
+      : "font-mono text-black mb-2";
     li.addEventListener("click", () => {
       //   li.style.display = "none"; // döljer raden om jag klickar på den
 
@@ -35,15 +64,6 @@ function renderTodoList() {
   });
 }
 renderTodoList();
-
-//Det här är inputfältet
-const input = document.createElement("input");
-input.type = "text";
-input.className =
-  "bg-white p-2 mt-4 block w-full rounded focus:outline-none focus:ring-0";
-
-const listElement = document.getElementById("todo-list");
-listElement.parentNode.appendChild(input);
 
 function addTodoFromInput() {
   const text = input.value.trim();

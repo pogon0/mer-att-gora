@@ -15,7 +15,7 @@ VG
 
 //Spara och hämta listan i LocalStorage?
 
-Flytta all styling till js
+FIXAT Flytta all styling till js
 
 Fixa Scss och Tailwind så det funkar ordentligt
 
@@ -42,3 +42,4 @@ FIXAT Rita ikoner för true, false, plus, minus, upp, ner 24px svg
 
 .
 Icon
+Testat få till favicon, funkar inte
