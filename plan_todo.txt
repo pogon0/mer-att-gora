@@ -13,15 +13,29 @@ VG
 
 (VG) FIXAT Skapa ett formulär som tillåter att en användare skapar nya todos efterhand.
 
-//Spara och hämta listan i LocalStorage
+//Spara och hämta listan i LocalStorage?
+
+Flytta all styling till js
+
+Fixa Scss och Tailwind så det funkar ordentligt
 
 //gör allt med ikoner istället
+alla rader har ikon true/false först. 
+alla rader har upp och ner till höger som flyttar upp/ner ett steg.
+klickar man på statusikonen togglas ikonen och statusen 
+när man klickar på text kommer texten upp i textfält
+till vänster i textfältet finns minusikonen för att radera
+till höger finns + som bekräfta
+enter sparar också redigerad rad
+lägg plusikonen inne i inputrutan
+flytta allt färdigt till botten under textfältet
+
 
 FIXAT Rita ikoner för true, false, plus, minus, upp, ner 24px svg
 
 //Ta bort sak från listan
 
-//sortera: gjord/ogjord --alfabetiskt -- 
+//sortera: gjord/ogjord 
 
 //(VG) Kunna sortera ordningen på dina todos
 

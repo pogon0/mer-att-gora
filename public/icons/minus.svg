@@ -11,7 +11,5 @@
     <rect class="cls-1" x="2" y="2" width="20" height="20"/>
     <path d="M20,4v16H4V4h16M24,0H0v24h24V0h0Z"/>
   </g>
-  <rect x="10" y="9.96" width="4" height="4"/>
-  <rect x="14" y="9.96" width="4" height="4"/>
-  <rect x="6" y="9.96" width="4" height="4"/>
+  <polygon points="14 10 10 10 6 10 6 14 10 14 14 14 18 14 18 10 14 10"/>
 </svg>

@@ -19,8 +19,7 @@ function renderTodoList() {
   todoList.items.forEach((item) => {
     const li = document.createElement("li");
     li.textContent = item.text;
-    li.className = item.done ? "text-red-500" : "text-black";
-
+    li.className = item.done ? "text-red-500 mb-2" : "text-black mb-2";
     li.addEventListener("click", () => {
       //   li.style.display = "none"; // döljer raden om jag klickar på den
 
@@ -41,7 +40,7 @@ renderTodoList();
 const input = document.createElement("input");
 input.type = "text";
 input.className =
-  "bg-white p-2 mt-2 block w-full border border-gray-300 rounded";
+  "bg-white p-2 mt-4 block w-full rounded focus:outline-none focus:ring-0";
 
 const listElement = document.getElementById("todo-list");
 listElement.parentNode.appendChild(input);
