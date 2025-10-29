@@ -51,12 +51,66 @@ sortButton.addEventListener("click", () => {
   renderTodoList();
 });
 
-//Inputfältet
+// nya inputfältet
+//Gör en kontainer
+const inputContainer = document.createElement("div");
+inputContainer.className = "relative mt-4 w-full";
+
+//fixa knappen
+const addButton = document.createElement("button");
+addButton.className = "absolute left-2 top-1/2 -translate-y-1/2";
+const addIcon = document.createElement("img");
+addIcon.src = "/icons/plus.svg";
+addIcon.className = "w-6 h-6";
+addButton.appendChild(addIcon);
+
+//inputfältet
 const input = document.createElement("input");
 input.type = "text";
 input.className =
-  "bg-white p-2 mt-4 block w-full focus:outline-none focus:ring-0";
-listElement.parentNode.appendChild(input);
+  "bg-white pl-10 pr-3 py-2 block w-full focus:outline-none focus:ring-0";
+
+//sätt ihop
+inputContainer.appendChild(addButton);
+inputContainer.appendChild(input);
+app.appendChild(inputContainer);
+
+//Knapptryckning
+addButton.addEventListener("click", () => {
+  addTodoFromInput();
+});
+
+// Enter
+input.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    addTodoFromInput();
+  }
+});
+
+//Fixar en ny grej
+function addTodoFromInput() {
+  const text = input.value.trim();
+  if (text === "") return;
+  //id-t ska blir +1 från det sista
+  const newId = todoList.items.length
+    ? todoList.items[todoList.items.length - 1].id + 1
+    : 1;
+
+  todoList.items.push({ id: newId, text, done: false });
+
+  //Sparar i local storage
+  localStorage.setItem("todos", JSON.stringify(todoList.items));
+
+  input.value = "";
+  renderTodoList();
+}
+
+// //Gamla inputfältet
+// const input = document.createElement("input");
+// input.type = "text";
+// input.className =
+//   "bg-white p-2 mt-4 block w-full focus:outline-none focus:ring-0";
+// listElement.parentNode.appendChild(input);
 
 //Skapar min grundlista
 const todoList = {
@@ -101,28 +155,3 @@ function renderTodoList() {
 }
 
 renderTodoList();
-
-//Fixar en ny grej
-function addTodoFromInput() {
-  const text = input.value.trim();
-  if (text === "") return;
-  //id-t ska blir +1 från det sista
-  const newId = todoList.items.length
-    ? todoList.items[todoList.items.length - 1].id + 1
-    : 1;
-
-  todoList.items.push({ id: newId, text, done: false });
-
-  //Sparar i local storage
-  localStorage.setItem("todos", JSON.stringify(todoList.items));
-
-  input.value = "";
-  renderTodoList();
-}
-
-// Lägg till grej när man trycker Enter
-input.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    addTodoFromInput();
-  }
-});
