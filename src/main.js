@@ -123,23 +123,56 @@ const todoList = {
   ],
 };
 
+//Funktionen för redigering och radering
+function createLeftIcons(editContainer, editInput, item) {
+  const plusButton = document.createElement("button");
+  plusButton.className = "absolute left-2 top-1/2 -translate-y-1/2";
+  const plusIcon = document.createElement("img");
+  plusIcon.src = "/icons/plus.svg";
+  plusIcon.className = "w-6 h-6";
+  plusButton.appendChild(plusIcon);
+
+  plusButton.addEventListener("click", () => {
+    item.text = editInput.value;
+    localStorage.setItem("todos", JSON.stringify(todoList.items));
+    renderTodoList();
+  });
+
+  const minusButton = document.createElement("button");
+  minusButton.className = "absolute left-10 top-1/2 -translate-y-1/2";
+  const minusIcon = document.createElement("img");
+  minusIcon.src = "/icons/minus.svg";
+  minusIcon.className = "w-6 h-6";
+  minusButton.appendChild(minusIcon);
+
+  // Klick minus tar bort objektet
+  minusButton.addEventListener("click", () => {
+    todoList.items = todoList.items.filter((i) => i.id !== item.id);
+    localStorage.setItem("todos", JSON.stringify(todoList.items));
+    renderTodoList();
+  });
+
+  //Lägg till knapparna
+  editContainer.appendChild(plusButton);
+  editContainer.appendChild(minusButton);
+}
+
 //Spara listan till localStorage
 const saved = localStorage.getItem("todos");
 if (saved) {
   todoList.items = JSON.parse(saved);
 }
 
-//Ny rendera lista – nu med ikoner
+//rendera lista v3 nu med redigeringen
 function renderTodoList() {
   const listElement = document.getElementById("todo-list");
-  listElement.innerHTML = ""; // Töm listan först så det inte bara bygger på
+  listElement.innerHTML = "";
 
   todoList.items.forEach((item) => {
     const li = document.createElement("li");
     li.dataset.id = item.id;
     li.className = "flex items-baseline gap-2 mb-2 font-mono";
 
-    // Lägg till ikonen
     const icon = document.createElement("img");
     icon.src = item.done ? "/icons/done.svg" : "/icons/todo.svg";
     icon.className = "w-3 h-3";
@@ -151,17 +184,79 @@ function renderTodoList() {
       icon.src = item.done ? "/icons/done.svg" : "/icons/todo.svg";
     });
 
-    // Lägg till texten
+    // Lägg till text i raden
     const text = document.createElement("span");
     text.textContent = item.text;
+    text.className = "todo-text";
 
-    // Lägg ihop ikon + text i li
+    // Lägg ihop ikonerna
     li.appendChild(icon);
     li.appendChild(text);
 
+    //Klicka på raden för att redigera
+    text.addEventListener("click", () => {
+      const existing = li.querySelector(".edit-container");
+      const editContainer = document.createElement("div");
+      editContainer.className = "relative mt-2 w-full";
+      const editInput = document.createElement("input");
+      editInput.type = "text";
+      editInput.value = item.text;
+      editInput.className =
+        "bg-white pl-[72px] py-2 block w-full focus:outline-none focus:ring-0";
+
+      editContainer.appendChild(editInput);
+      li.after(editContainer);
+
+      createLeftIcons(editContainer, editInput, item);
+
+      //enter ska funka också //Kanske lägga till esc och delete för minus?
+      editInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          item.text = editInput.value;
+          localStorage.setItem("todos", JSON.stringify(todoList.items));
+          renderTodoList();
+        }
+      });
+    });
+
+    // Lägg li i listElement
     listElement.appendChild(li);
   });
 }
+
+// //Ny rendera lista – nu med ikoner
+// function renderTodoList() {
+//   const listElement = document.getElementById("todo-list");
+//   listElement.innerHTML = ""; // Töm listan först så det inte bara bygger på
+
+//   todoList.items.forEach((item) => {
+//     const li = document.createElement("li");
+//     li.dataset.id = item.id;
+//     li.className = "flex items-baseline gap-2 mb-2 font-mono";
+
+//     // Lägg till ikonen
+//     const icon = document.createElement("img");
+//     icon.src = item.done ? "/icons/done.svg" : "/icons/todo.svg";
+//     icon.className = "w-3 h-3";
+
+//     // Klick på ikonen växlar status
+//     icon.addEventListener("click", () => {
+//       item.done = !item.done;
+//       localStorage.setItem("todos", JSON.stringify(todoList.items));
+//       icon.src = item.done ? "/icons/done.svg" : "/icons/todo.svg";
+//     });
+
+//     // Lägg till texten
+//     const text = document.createElement("span");
+//     text.textContent = item.text;
+
+//     // Lägg ihop ikon + text i li
+//     li.appendChild(icon);
+//     li.appendChild(text);
+
+//     listElement.appendChild(li);
+//   });
+// }
 
 //GAmla rendera-listan
 // //Ritar ut listan på skärmen
