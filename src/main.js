@@ -80,7 +80,7 @@ addButton.addEventListener("click", () => {
   addTodoFromInput();
 });
 
-// Enter
+//Enter
 input.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
     addTodoFromInput();
@@ -129,29 +129,64 @@ if (saved) {
   todoList.items = JSON.parse(saved);
 }
 
-//Ritar ut listan på skärmen
+//Ny rendera lista – nu med ikoner
 function renderTodoList() {
   const listElement = document.getElementById("todo-list");
-  listElement.innerHTML = ""; // Töm listan först
+  listElement.innerHTML = ""; // Töm listan först så det inte bara bygger på
 
   todoList.items.forEach((item) => {
     const li = document.createElement("li");
-    li.textContent = item.text;
     li.dataset.id = item.id;
-    li.className = item.done
-      ? "font-mono text-red-500 mb-2"
-      : "font-mono text-black mb-2";
+    li.className = "flex items-baseline gap-2 mb-2 font-mono";
 
-    li.addEventListener("click", () => {
+    // Lägg till ikonen
+    const icon = document.createElement("img");
+    icon.src = item.done ? "/icons/done.svg" : "/icons/todo.svg";
+    icon.className = "w-3 h-3";
+
+    // Klick på ikonen växlar status
+    icon.addEventListener("click", () => {
       item.done = !item.done;
       localStorage.setItem("todos", JSON.stringify(todoList.items));
-      li.className = item.done
-        ? "font-mono text-red-500 mb-2"
-        : "font-mono text-black mb-2";
+      icon.src = item.done ? "/icons/done.svg" : "/icons/todo.svg";
     });
+
+    // Lägg till texten
+    const text = document.createElement("span");
+    text.textContent = item.text;
+
+    // Lägg ihop ikon + text i li
+    li.appendChild(icon);
+    li.appendChild(text);
 
     listElement.appendChild(li);
   });
 }
+
+//GAmla rendera-listan
+// //Ritar ut listan på skärmen
+// function renderTodoList() {
+//   const listElement = document.getElementById("todo-list");
+//   listElement.innerHTML = ""; // Töm listan först
+
+//   todoList.items.forEach((item) => {
+//     const li = document.createElement("li");
+//     li.textContent = item.text;
+//     li.dataset.id = item.id;
+//     li.className = item.done
+//       ? "font-mono text-red-500 mb-2"
+//       : "font-mono text-black mb-2";
+
+//     li.addEventListener("click", () => {
+//       item.done = !item.done;
+//       localStorage.setItem("todos", JSON.stringify(todoList.items));
+//       li.className = item.done
+//         ? "font-mono text-red-500 mb-2"
+//         : "font-mono text-black mb-2";
+//     });
+
+//     listElement.appendChild(li);
+//   });
+// }
 
 renderTodoList();
