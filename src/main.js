@@ -2,36 +2,35 @@ import "./main.scss";
 
 // Styling för själva sidan
 document.body.className =
-  "bg-gray-100 flex items-center justify-center min-h-screen";
+  "bg-black flex items-center justify-center min-h-screen";
 
-// Styling för "appen" OBS! 650 behöver lösas så ramen inte överskrids
+// Fixar styling för "appen"
 const app = document.getElementById("app");
-app.className = "bg-yellow-300 p-6 xrounded shadow h-[650px] max-w-md w-full";
+app.className = "bg-yellow-300 p-6 min-h-[650px] max-w-md w-full";
 
-// Skapa container för rubrik + knapp
+// Skapar container för rubrik och knapp i DOM
 const headerContainer = document.createElement("div");
 headerContainer.className = "flex items-center mb-4";
 
-// Skriv rubriken
+// Skapar rubriken i DOM
 const title = document.createElement("h1");
 title.id = "merAttGora";
 title.textContent = "mer att göra";
 title.className = "text-4xl font-bold font-mono mb-2";
 
-// Skapa knappen med ikon
+// Skapar sorterings-knappen med ikon
 const sortButton = document.createElement("button");
-sortButton.className =
-  "ml-auto flex items-center gap-2 p-2 rounded bg-transparent";
+sortButton.className = "ml-auto flex items-center gap-2 p-2 bg-transparent";
 const sortIcon = document.createElement("img");
 sortIcon.src = "/icons/up.svg";
 sortIcon.className = "w-6 h-6";
 sortButton.appendChild(sortIcon);
 
-// Lägg rubrik och knapp i containern
+// Lägger till rubrik och sorterings-knapp i containern
 headerContainer.appendChild(title);
 headerContainer.appendChild(sortButton);
 
-// Skapa listan här
+// Skapar listan i DOM
 const listElement = document.createElement("ul");
 listElement.id = "todo-list";
 listElement.className = "font-mono mt-4";
@@ -40,7 +39,7 @@ app.appendChild(listElement);
 // Placera header-container ovanför listan
 app.insertBefore(headerContainer, listElement);
 
-// Variabel för sortering
+// Deklarerar variabel för sortering
 let sortUp = true;
 
 // Sorteringsknappen
@@ -52,14 +51,14 @@ sortButton.addEventListener("click", () => {
   renderTodoList();
 });
 
-//Det här är inputfältet
+//Inputfältet
 const input = document.createElement("input");
 input.type = "text";
 input.className =
-  "bg-white p-2 mt-4 block w-full xrounded focus:outline-none focus:ring-0";
+  "bg-white p-2 mt-4 block w-full focus:outline-none focus:ring-0";
 listElement.parentNode.appendChild(input);
 
-//det här är min grundlista
+//Skapar min grundlista
 const todoList = {
   items: [
     { id: 1, text: "Lära mig Javascript", done: false },
@@ -70,13 +69,13 @@ const todoList = {
   ],
 };
 
-//nu sparar vi listan till localStorage
+//Spara listan till localStorage
 const saved = localStorage.getItem("todos");
 if (saved) {
   todoList.items = JSON.parse(saved);
 }
 
-//nu ritar jag ut listan på skärmen
+//Ritar ut listan på skärmen
 function renderTodoList() {
   const listElement = document.getElementById("todo-list");
   listElement.innerHTML = ""; // Töm listan först
@@ -103,7 +102,7 @@ function renderTodoList() {
 
 renderTodoList();
 
-//det här är det som fixar en ny grej
+//Fixar en ny grej
 function addTodoFromInput() {
   const text = input.value.trim();
   if (text === "") return;
@@ -114,7 +113,7 @@ function addTodoFromInput() {
 
   todoList.items.push({ id: newId, text, done: false });
 
-  //spara i local storage
+  //Sparar i local storage
   localStorage.setItem("todos", JSON.stringify(todoList.items));
 
   input.value = "";

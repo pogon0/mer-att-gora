@@ -4,8 +4,6 @@ FIXAT testa att öppna projektet
 
 FIXAT committa och pusha den här filen så jag vet att det funkar
 
-Installera tailwind (funkar inte som det ska, fixade med länk istället)
-
 FIXAT Minimal viable product=G 
 
 VG
@@ -13,33 +11,51 @@ VG
 
 (VG) FIXAT Skapa ett formulär som tillåter att en användare skapar nya todos efterhand.
 
-//Spara och hämta listan i LocalStorage?
+FIXAT Spara och hämta listan i LocalStorage? 
 
 FIXAT Flytta all styling till js
 
-Fixa Scss och Tailwind så det funkar ordentligt
-
-//gör allt med ikoner istället
-alla rader har ikon true/false först. 
-alla rader har upp och ner till höger som flyttar upp/ner ett steg.
-klickar man på statusikonen togglas ikonen och statusen 
-när man klickar på text kommer texten upp i textfält
-till vänster i textfältet finns minusikonen för att radera
-till höger finns + som bekräfta
-enter sparar också redigerad rad
-lägg plusikonen inne i inputrutan
-flytta allt färdigt till botten under textfältet
-
+KOLLA logiken på när det sparas och hämtas från LocalStorage
 
 FIXAT Rita ikoner för true, false, plus, minus, upp, ner 24px svg
 
-//Ta bort sak från listan
+FIXAT sortera: gjord/ogjord 
 
-//sortera: gjord/ogjord 
+FIXAT (VG) Kunna sortera ordningen på dina todos
 
-//(VG) Kunna sortera ordningen på dina todos
+FIXAT 650 behöver lösas så ramen inte överskrids
 
 
-.
-Icon
-Testat få till favicon, funkar inte
+ONSDAG:
+FIXAT Städa plan och kommentarer
+
+//gör allt med ikoner istället
+alla rader har ikon true/false först. 
+
+klickar man på statusikonen togglas ikonen och statusen 
+
+när man klickar på text kommer texten upp i textfält
+i det nya redigeringsfönstret:
+till vänster i textfältet finns minusikonen för att radera (dialogruta?)
+till höger pilikoner som som flyttar upp/ner ett steg.
+till vänster finns + som bekräfta
+enter sparar också redigerad rad
+
++ - Här redigerar man text. ^ v
+
+lägg plusikonen inne i vanliga inputrutan som "enter"
+Fältet borde också ha +knapp som bekräfta
+
+Ta bort sak från listan med minusikonen
+
+
+
+---
+FELSÖK Icon Testat få till favicon(?), funkar inte. 
+
+KOLLA hur det funkar med olika pekare
+
+KOLLA Vilka grejjer som skulle kunna snyggas till med animationer.
+
+HJÄLP Installera tailwind (funkar inte som det ska, fixade med länk istället)
+Fixa Scss och Tailwind så det funkar ordentligt
