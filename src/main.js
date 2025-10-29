@@ -51,12 +51,12 @@ sortButton.addEventListener("click", () => {
   renderTodoList();
 });
 
-// nya inputfältet
+// Nya inputfältet
 //Gör en kontainer
 const inputContainer = document.createElement("div");
 inputContainer.className = "relative mt-4 w-full";
 
-//fixa knappen
+//Gör plus-knappen
 const addButton = document.createElement("button");
 addButton.className = "absolute left-2 top-1/2 -translate-y-1/2";
 const addIcon = document.createElement("img");
@@ -64,13 +64,13 @@ addIcon.src = "/icons/plus.svg";
 addIcon.className = "w-6 h-6";
 addButton.appendChild(addIcon);
 
-//inputfältet
+//Gör inputfältet
 const input = document.createElement("input");
 input.type = "text";
 input.className =
   "bg-white pl-10 pr-3 py-2 block w-full focus:outline-none focus:ring-0";
 
-//sätt ihop
+//Sätt ihop och rita ut
 inputContainer.appendChild(addButton);
 inputContainer.appendChild(input);
 app.appendChild(inputContainer);
@@ -87,11 +87,11 @@ input.addEventListener("keydown", (e) => {
   }
 });
 
-//Fixar en ny grej
+//Lägg till en ny grej
 function addTodoFromInput() {
   const text = input.value.trim();
   if (text === "") return;
-  //id-t ska blir +1 från det sista
+  //id-t ska bli +1 från det sista
   const newId = todoList.items.length
     ? todoList.items[todoList.items.length - 1].id + 1
     : 1;
@@ -105,14 +105,7 @@ function addTodoFromInput() {
   renderTodoList();
 }
 
-// //Gamla inputfältet
-// const input = document.createElement("input");
-// input.type = "text";
-// input.className =
-//   "bg-white p-2 mt-4 block w-full focus:outline-none focus:ring-0";
-// listElement.parentNode.appendChild(input);
-
-//Skapar min grundlista
+//Skapa min grundlista
 const todoList = {
   items: [
     { id: 1, text: "Lära mig Javascript", done: false },
@@ -132,6 +125,7 @@ function createLeftIcons(editContainer, editInput, item) {
   plusIcon.className = "w-6 h-6";
   plusButton.appendChild(plusIcon);
 
+  //Klick plus funkar som enter här
   plusButton.addEventListener("click", () => {
     item.text = editInput.value;
     localStorage.setItem("todos", JSON.stringify(todoList.items));
@@ -163,10 +157,10 @@ if (saved) {
   todoList.items = JSON.parse(saved);
 }
 
-//rendera lista v3 nu med redigeringen
+//Rendera lista v3 nu med redigeringen
 function renderTodoList() {
   const listElement = document.getElementById("todo-list");
-  listElement.innerHTML = "";
+  listElement.innerHTML = ""; //Tömmer listan
 
   todoList.items.forEach((item) => {
     const li = document.createElement("li");
@@ -184,12 +178,12 @@ function renderTodoList() {
       icon.src = item.done ? "/icons/done.svg" : "/icons/todo.svg";
     });
 
-    // Lägg till text i raden
+    // Lägg till text
     const text = document.createElement("span");
     text.textContent = item.text;
     text.className = "todo-text";
 
-    // Lägg ihop ikonerna
+    // Lägg ihop ikonerna och texten
     li.appendChild(icon);
     li.appendChild(text);
 
@@ -205,11 +199,12 @@ function renderTodoList() {
         "bg-white pl-[72px] py-2 block w-full focus:outline-none focus:ring-0";
 
       editContainer.appendChild(editInput);
-      li.after(editContainer);
-
+      text.style.display = "none";
+      li.appendChild(editContainer);
+      editInput.focus();
       createLeftIcons(editContainer, editInput, item);
 
-      //enter ska funka också //Kanske lägga till esc och delete för minus?
+      //Enter sparar och stänger
       editInput.addEventListener("keydown", (e) => {
         if (e.key === "Enter") {
           item.text = editInput.value;
@@ -217,71 +212,27 @@ function renderTodoList() {
           renderTodoList();
         }
       });
-    });
 
+      // Escape stänger edit-rutan utan att spara
+      editInput.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          const editContainer = editInput.parentElement;
+          editInput.remove(); // ta bort själva inputen
+          text.style.display = "";
+          editContainer.remove();
+        }
+      });
+
+      //För att inte flera edit-rutor ska kunna vara öppna samtidig
+      editInput.addEventListener("blur", () => {
+        item.text = editInput.value.trim();
+        localStorage.setItem("todos", JSON.stringify(todoList.items));
+        renderTodoList();
+      });
+    });
     // Lägg li i listElement
     listElement.appendChild(li);
   });
 }
-
-// //Ny rendera lista – nu med ikoner
-// function renderTodoList() {
-//   const listElement = document.getElementById("todo-list");
-//   listElement.innerHTML = ""; // Töm listan först så det inte bara bygger på
-
-//   todoList.items.forEach((item) => {
-//     const li = document.createElement("li");
-//     li.dataset.id = item.id;
-//     li.className = "flex items-baseline gap-2 mb-2 font-mono";
-
-//     // Lägg till ikonen
-//     const icon = document.createElement("img");
-//     icon.src = item.done ? "/icons/done.svg" : "/icons/todo.svg";
-//     icon.className = "w-3 h-3";
-
-//     // Klick på ikonen växlar status
-//     icon.addEventListener("click", () => {
-//       item.done = !item.done;
-//       localStorage.setItem("todos", JSON.stringify(todoList.items));
-//       icon.src = item.done ? "/icons/done.svg" : "/icons/todo.svg";
-//     });
-
-//     // Lägg till texten
-//     const text = document.createElement("span");
-//     text.textContent = item.text;
-
-//     // Lägg ihop ikon + text i li
-//     li.appendChild(icon);
-//     li.appendChild(text);
-
-//     listElement.appendChild(li);
-//   });
-// }
-
-//GAmla rendera-listan
-// //Ritar ut listan på skärmen
-// function renderTodoList() {
-//   const listElement = document.getElementById("todo-list");
-//   listElement.innerHTML = ""; // Töm listan först
-
-//   todoList.items.forEach((item) => {
-//     const li = document.createElement("li");
-//     li.textContent = item.text;
-//     li.dataset.id = item.id;
-//     li.className = item.done
-//       ? "font-mono text-red-500 mb-2"
-//       : "font-mono text-black mb-2";
-
-//     li.addEventListener("click", () => {
-//       item.done = !item.done;
-//       localStorage.setItem("todos", JSON.stringify(todoList.items));
-//       li.className = item.done
-//         ? "font-mono text-red-500 mb-2"
-//         : "font-mono text-black mb-2";
-//     });
-
-//     listElement.appendChild(li);
-//   });
-// }
 
 renderTodoList();
