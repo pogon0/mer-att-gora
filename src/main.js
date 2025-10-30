@@ -39,10 +39,8 @@ app.appendChild(listElement);
 // Placera header-container ovanför listan
 app.insertBefore(headerContainer, listElement);
 
-// Deklarerar variabel för sortering
-let sortUp = true;
-
 // Sorteringsknappen
+let sortUp = true;
 sortButton.addEventListener("click", () => {
   sortUp = !sortUp;
   sortIcon.src = sortUp ? "/icons/up.svg" : "/icons/down.svg";
@@ -117,7 +115,9 @@ const todoList = {
 };
 
 //Funktionen för redigering och radering
+//Gör ikonerna
 function createLeftIcons(editContainer, editInput, item) {
+  //Gör plusknappen
   const plusButton = document.createElement("button");
   plusButton.className = "absolute left-2 top-1/2 -translate-y-1/2";
   const plusIcon = document.createElement("img");
@@ -127,11 +127,14 @@ function createLeftIcons(editContainer, editInput, item) {
 
   //Klick plus funkar som enter här
   plusButton.addEventListener("click", () => {
-    item.text = editInput.value;
+    const newText = editInput.value.trim();
+    if (newText === "") return;
+    item.text = newText;
     localStorage.setItem("todos", JSON.stringify(todoList.items));
     renderTodoList();
   });
 
+  //Gör minusknappen
   const minusButton = document.createElement("button");
   minusButton.className = "absolute left-10 top-1/2 -translate-y-1/2";
   const minusIcon = document.createElement("img");
@@ -198,17 +201,23 @@ function renderTodoList() {
       editInput.className =
         "bg-white pl-[72px] py-2 block w-full focus:outline-none focus:ring-0";
 
+      // Inputrutan
       editContainer.appendChild(editInput);
       text.style.display = "none";
-      li.appendChild(editContainer);
+      icon.style.display = "none";
+      li.insertBefore(editContainer, li.firstChild);
       editInput.focus();
       createLeftIcons(editContainer, editInput, item);
 
       //Enter sparar och stänger
       editInput.addEventListener("keydown", (e) => {
         if (e.key === "Enter") {
-          item.text = editInput.value;
+          const newText = editInput.value.trim();
+          if (newText === "") return;
+          item.text = newText;
           localStorage.setItem("todos", JSON.stringify(todoList.items));
+          text.style.display = "";
+          icon.style.display = "";
           renderTodoList();
         }
       });
@@ -219,14 +228,19 @@ function renderTodoList() {
           const editContainer = editInput.parentElement;
           editInput.remove(); // ta bort själva inputen
           text.style.display = "";
+          icon.style.display = "";
           editContainer.remove();
         }
       });
 
-      //För att inte flera edit-rutor ska kunna vara öppna samtidig
+      //För att inte flera edit-rutor ska kunna vara öppna samtidigt
       editInput.addEventListener("blur", () => {
-        item.text = editInput.value.trim();
+        const newText = editInput.value.trim();
+        if (newText === "") return;
+        item.text = newText;
         localStorage.setItem("todos", JSON.stringify(todoList.items));
+        text.style.display = "";
+        icon.style.display = "";
         renderTodoList();
       });
     });
