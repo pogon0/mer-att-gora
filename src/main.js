@@ -116,7 +116,7 @@ const todoList = {
 
 //Funktionen för redigering och radering
 //Gör ikonerna
-function createLeftIcons(editContainer, editInput, item) {
+function createLeftIcons(editContainer, editInput, item, li) {
   //Gör plusknappen
   const plusButton = document.createElement("button");
   plusButton.className = "absolute left-2 top-1/2 -translate-y-1/2";
@@ -146,7 +146,7 @@ function createLeftIcons(editContainer, editInput, item) {
   minusButton.addEventListener("click", () => {
     todoList.items = todoList.items.filter((i) => i.id !== item.id);
     localStorage.setItem("todos", JSON.stringify(todoList.items));
-    renderTodoList();
+    li.remove();
   });
 
   //Lägg till knapparna
@@ -166,6 +166,7 @@ function renderTodoList() {
   listElement.innerHTML = ""; //Tömmer listan
 
   todoList.items.forEach((item) => {
+    if (!item.text || item.text.trim() === "") return; // trimma tomma rader
     const li = document.createElement("li");
     li.dataset.id = item.id;
     li.className = "flex items-baseline gap-2 mb-2 font-mono";
@@ -191,10 +192,11 @@ function renderTodoList() {
     li.appendChild(text);
 
     //Klicka på raden för att redigera
+
     text.addEventListener("click", () => {
       const existing = li.querySelector(".edit-container");
       const editContainer = document.createElement("div");
-      editContainer.className = "relative mt-2 w-full";
+      editContainer.className = "edit-container relative mt-2 w-full";
       const editInput = document.createElement("input");
       editInput.type = "text";
       editInput.value = item.text;
@@ -207,7 +209,16 @@ function renderTodoList() {
       icon.style.display = "none";
       li.insertBefore(editContainer, li.firstChild);
       editInput.focus();
-      createLeftIcons(editContainer, editInput, item);
+
+      // Ny lösning för att undvika dubbla rutor med fungerande knappar
+      editInput.addEventListener("blur", (e) => {
+        if (e.relatedTarget && editContainer.contains(e.relatedTarget)) return;
+        editContainer.remove();
+        text.style.display = "";
+        icon.style.display = "";
+      });
+
+      createLeftIcons(editContainer, editInput, item, li);
 
       //Enter sparar och stänger
       editInput.addEventListener("keydown", (e) => {
@@ -225,23 +236,10 @@ function renderTodoList() {
       // Escape stänger edit-rutan utan att spara
       editInput.addEventListener("keydown", (e) => {
         if (e.key === "Escape") {
-          const editContainer = editInput.parentElement;
-          editInput.remove(); // ta bort själva inputen
+          editContainer.remove();
           text.style.display = "";
           icon.style.display = "";
-          editContainer.remove();
         }
-      });
-
-      //För att inte flera edit-rutor ska kunna vara öppna samtidigt
-      editInput.addEventListener("blur", () => {
-        const newText = editInput.value.trim();
-        if (newText === "") return;
-        item.text = newText;
-        localStorage.setItem("todos", JSON.stringify(todoList.items));
-        text.style.display = "";
-        icon.style.display = "";
-        renderTodoList();
       });
     });
     // Lägg li i listElement
