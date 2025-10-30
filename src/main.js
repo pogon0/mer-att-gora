@@ -169,7 +169,7 @@ function renderTodoList() {
     if (!item.text || item.text.trim() === "") return; // trimma tomma rader
     const li = document.createElement("li");
     li.dataset.id = item.id;
-    li.className = "flex items-baseline gap-2 mb-2 font-mono";
+    li.className = "flex items-baseline gap-2 mb-2 font-mono cursor-pointer";
 
     const icon = document.createElement("img");
     icon.src = item.done ? "/icons/done.svg" : "/icons/todo.svg";

@@ -29,33 +29,41 @@ FIXAT 650 behöver lösas så ramen inte överskrids
 ONSDAG:
 FIXAT Städa plan och kommentarer
 
-//gör allt med ikoner istället
-alla rader har ikon true/false först. 
+FIXAT gör allt med ikoner istället
+FIXAT alla rader har ikon true/false först. 
 
-klickar man på statusikonen togglas ikonen och statusen 
+FIXAT klickar man på statusikonen togglas ikonen och statusen 
 
-när man klickar på text kommer texten upp i textfält
-i det nya redigeringsfönstret:
-till vänster i textfältet finns minusikonen för att radera (dialogruta?)
-till höger pilikoner som som flyttar upp/ner ett steg.
-till vänster finns + som bekräfta
-enter sparar också redigerad rad
+FIXAT när man klickar på text kommer texten upp i textfält
+    i det nya redigeringsfönstret:
+    till vänster i textfältet finns minusikonen för att radera (dialogruta?)
+    till höger pilikoner som som flyttar upp/ner ett steg.
+    till vänster finns + som bekräfta
+    enter sparar också redigerad rad
 
-+ - Här redigerar man text. ^ v
+FIXAT + - Här redigerar man text. ^ v
 
-lägg plusikonen inne i vanliga inputrutan som "enter"
-Fältet borde också ha +knapp som bekräfta
+FIXAT lägg plusikonen inne i vanliga inputrutan som "enter"
+FIXAT Fältet borde också ha +knapp som bekräfta
 
-Ta bort sak från listan med minusikonen
+FIXAT Ta bort sak från listan med minusikonen
 
-
+KOLLAT hur det funkar med olika pekare
 
 ---
+LÄGG TILL flytta upp- och nerpilar i editrutan.
+
+FIXA så input och editrutor växer när man skriver något som är flera rader.
+
+FIXA en priofunktion som sätter texten fet och röd om det är brådis.
+
 FELSÖK Icon Testat få till favicon(?), funkar inte. 
 
-KOLLA hur det funkar med olika pekare
+FIXA så cursor hamnar först istället.
+
 
 KOLLA Vilka grejjer som skulle kunna snyggas till med animationer.
 
 HJÄLP Installera tailwind (funkar inte som det ska, fixade med länk istället)
-Fixa Scss och Tailwind så det funkar ordentligt
+
+FIXA Scss och Tailwind så det funkar ordentligt
