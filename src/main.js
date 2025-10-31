@@ -10,13 +10,14 @@ app.className = "bg-yellow-300 p-6 min-h-[650px] max-w-md w-full";
 
 // Skapar container för rubrik och knapp i DOM
 const headerContainer = document.createElement("div");
-headerContainer.className = "flex items-center mb-4";
+headerContainer.className =
+  "flex justify-between xitems-center mb-4 bg-yellow-300";
 
 // Skapar rubriken i DOM
 const title = document.createElement("h1");
 title.id = "merAttGora";
 title.textContent = "mer att göra";
-title.className = "text-4xl font-bold font-mono mb-2";
+title.className = "text-4xl font-bold font-mono -ml-[2px]";
 
 // Skapar sorterings-knappen med ikon
 const sortButton = document.createElement("button");
@@ -52,7 +53,7 @@ sortButton.addEventListener("click", () => {
 // Nya inputfältet
 //Gör en kontainer
 const inputContainer = document.createElement("div");
-inputContainer.className = "relative mt-4 w-full";
+inputContainer.className = "relative mt-4 w-[calc(100%-8px)]";
 
 //Gör plus-knappen
 const addButton = document.createElement("button");
