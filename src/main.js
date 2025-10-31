@@ -10,8 +10,7 @@ app.className = "bg-yellow-300 p-6 min-h-[650px] max-w-md w-full";
 
 // Skapar container för rubrik och knapp i DOM
 const headerContainer = document.createElement("div");
-headerContainer.className =
-  "flex justify-between xitems-center mb-4 bg-yellow-300";
+headerContainer.className = "flex justify-between mb-4 bg-yellow-300";
 
 // Skapar rubriken i DOM
 const title = document.createElement("h1");
@@ -50,7 +49,7 @@ sortButton.addEventListener("click", () => {
   renderTodoList();
 });
 
-// Nya inputfältet
+// Inputfältet
 //Gör en kontainer
 const inputContainer = document.createElement("div");
 inputContainer.className = "relative mt-4 w-[calc(100%-8px)]";
@@ -161,7 +160,7 @@ if (saved) {
   todoList.items = JSON.parse(saved);
 }
 
-//Rendera lista v3 nu med redigeringen
+//Rendera lista med redigering
 function renderTodoList() {
   const listElement = document.getElementById("todo-list");
   listElement.innerHTML = ""; //Tömmer listan
@@ -192,12 +191,12 @@ function renderTodoList() {
     li.appendChild(icon);
     li.appendChild(text);
 
-    //Klicka på raden för att redigera
-
+    //Klick på raden redigerar
     text.addEventListener("click", () => {
       const existing = li.querySelector(".edit-container");
       const editContainer = document.createElement("div");
-      editContainer.className = "edit-container relative mt-2 w-full";
+      editContainer.className =
+        "edit-container relative mt-2 w-[calc(100%-8px)]";
       const editInput = document.createElement("input");
       editInput.type = "text";
       editInput.value = item.text;
@@ -211,7 +210,7 @@ function renderTodoList() {
       li.insertBefore(editContainer, li.firstChild);
       editInput.focus();
 
-      // Ny lösning för att undvika dubbla rutor med fungerande knappar
+      // Undvik dubbla rutor utan att knapparna går sönder
       editInput.addEventListener("blur", (e) => {
         if (e.relatedTarget && editContainer.contains(e.relatedTarget)) return;
         editContainer.remove();

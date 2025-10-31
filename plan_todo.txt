@@ -50,17 +50,21 @@ FIXAT Ta bort sak från listan med minusikonen
 
 KOLLAT hur det funkar med olika pekare
 
+FIXAT Kolla linjering
+
 ---
 LÄGG TILL flytta upp- och nerpilar i editrutan.
 
-FIXA så input och editrutor växer när man skriver något som är flera rader.
+FIXA så input och editrutor växer när man skriver något som är flera rader. 
+Kräver att de är textarea istället. Plusikonen måste positioneras om. 
+ 
+FIXA en priofunktion som sätter texten fet och röd om det är brådis. 
+Typ som GREP. Men om sidan ska tolka text kan det bli riskabelt om man inte 
+fixar så html inte körs.
 
-FIXA en priofunktion som sätter texten fet och röd om det är brådis.
-
-FELSÖK Icon Testat få till favicon(?), funkar inte. 
+FELSÖK Icon Testat få till favicon, funkar inte. 
 
 FIXA så cursor hamnar först istället.
-
 
 KOLLA Vilka grejjer som skulle kunna snyggas till med animationer.
 
